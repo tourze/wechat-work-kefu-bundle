@@ -1,6 +1,6 @@
 <?php
 
-namespace WechatWorkKefuBundle\Tests\Unit\Enum;
+namespace WechatWorkKefuBundle\Tests\Enum;
 
 use PHPUnit\Framework\TestCase;
 use WechatWorkKefuBundle\Enum\MessageType;

@@ -1,6 +1,6 @@
 <?php
 
-namespace WechatWorkKefuBundle\Tests\Unit\DependencyInjection;
+namespace WechatWorkKefuBundle\Tests\DependencyInjection;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

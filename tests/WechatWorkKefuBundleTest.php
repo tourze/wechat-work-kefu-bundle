@@ -1,6 +1,6 @@
 <?php
 
-namespace WechatWorkKefuBundle\Tests\Unit;
+namespace WechatWorkKefuBundle\Tests;
 
 use PHPUnit\Framework\TestCase;
 use WechatWorkKefuBundle\WechatWorkKefuBundle;
