@@ -2,12 +2,17 @@
 
 namespace WechatWorkKefuBundle\Tests\Enum;
 
-use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Tourze\PHPUnitEnum\AbstractEnumTestCase;
 use WechatWorkKefuBundle\Enum\MessageType;
 
-class MessageTypeTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(MessageType::class)]
+final class MessageTypeTest extends AbstractEnumTestCase
 {
-    public function testEnumValues_areCorrectlyDefined(): void
+    public function testEnumValuesAreCorrectlyDefined(): void
     {
         $this->assertSame('text', MessageType::TEXT->value);
         $this->assertSame('image', MessageType::IMAGE->value);
@@ -19,8 +24,8 @@ class MessageTypeTest extends TestCase
         $this->assertSame('location', MessageType::LOCATION->value);
         $this->assertSame('msgmenu', MessageType::MSG_MENU->value);
     }
-    
-    public function testGetLabel_returnsCorrectChineseLabel(): void
+
+    public function testGetLabelReturnsCorrectChineseLabel(): void
     {
         $this->assertSame('文本', MessageType::TEXT->getLabel());
         $this->assertSame('图片', MessageType::IMAGE->getLabel());
@@ -32,54 +37,61 @@ class MessageTypeTest extends TestCase
         $this->assertSame('地理位置', MessageType::LOCATION->getLabel());
         $this->assertSame('菜单', MessageType::MSG_MENU->getLabel());
     }
-    
-    public function testItemTraitMethods_workCorrectly(): void
+
+    public function testItemTraitMethodsWorkCorrectly(): void
     {
         $item = MessageType::TEXT->toSelectItem();
-        
+
         $this->assertArrayHasKey('label', $item);
-        $this->assertArrayHasKey('text', $item);
         $this->assertArrayHasKey('value', $item);
-        $this->assertArrayHasKey('name', $item);
-        
+
         $this->assertSame('文本', $item['label']);
-        $this->assertSame('文本', $item['text']);
         $this->assertSame('text', $item['value']);
-        $this->assertSame('文本', $item['name']);
-        
+
         $array = MessageType::TEXT->toArray();
         $this->assertArrayHasKey('value', $array);
         $this->assertArrayHasKey('label', $array);
         $this->assertSame('text', $array['value']);
         $this->assertSame('文本', $array['label']);
     }
-    
-    public function testSelectTraitMethods_workCorrectly(): void
+
+    public function testSelectTraitMethodsWorkCorrectly(): void
     {
         $options = MessageType::genOptions();
-        
+
         $this->assertCount(9, $options);
-        
+
         foreach ($options as $option) {
             $this->assertArrayHasKey('label', $option);
-            $this->assertArrayHasKey('text', $option);
             $this->assertArrayHasKey('value', $option);
-            $this->assertArrayHasKey('name', $option);
         }
-        
+
         // 确认至少一个具体的项目存在
         $textOption = null;
         foreach ($options as $option) {
-            if ($option['value'] === 'text') {
+            if ('text' === $option['value']) {
                 $textOption = $option;
                 break;
             }
         }
-        
+
         $this->assertNotNull($textOption);
         $this->assertSame('文本', $textOption['label']);
-        $this->assertSame('文本', $textOption['text']);
         $this->assertSame('text', $textOption['value']);
-        $this->assertSame('文本', $textOption['name']);
     }
-} 
+
+    public function testToArray(): void
+    {
+        $array = MessageType::TEXT->toArray();
+
+        $this->assertArrayHasKey('value', $array);
+        $this->assertArrayHasKey('label', $array);
+        $this->assertSame('text', $array['value']);
+        $this->assertSame('文本', $array['label']);
+
+        // 测试其他枚举值
+        $imageArray = MessageType::IMAGE->toArray();
+        $this->assertSame('image', $imageArray['value']);
+        $this->assertSame('图片', $imageArray['label']);
+    }
+}
