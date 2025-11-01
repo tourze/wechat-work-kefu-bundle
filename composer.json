@@ -18,8 +18,8 @@
     "symfony/property-access": "^7.3",
     "symfony/yaml": "^7.3",
     "tourze/bundle-dependency": "1.*",
-    "tourze/enum-extra": "1.*",
-    "tourze/symfony-dependency-service-loader": "1.*",
+    "tourze/enum-extra": "1.0.*",
+    "tourze/symfony-dependency-service-loader": "1.0.*",
     "tourze/wechat-work-bundle": "0.1.*"
   },
   "require-dev": {
